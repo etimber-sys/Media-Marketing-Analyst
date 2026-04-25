@@ -35,13 +35,16 @@ An end-to-end analytics engineering portfolio project targeting the **Analyst, M
 
 ```mermaid
 flowchart LR
-    A[TMDB API] -->|REST| B["extract/tmdb_extract.py\n(Python)"]
+    A[TMDB API] -->|REST| B["extract/tmdb_extract.py"]
+    W["Paramount IR\n& Press Sites"] -->|Firecrawl| FC["extract/firecrawl_extract.py"]
     B -->|load| C[("Snowflake\nRAW")]
+    FC -->|load| C
     C -->|dbt staging| D[("Snowflake\nSTAGING")]
     D -->|dbt mart| E[("Snowflake\nMART")]
     E -.->|Milestone 02| F["Streamlit\nDashboard"]
-    G["GitHub Actions\n(daily + manual)"] -->|"① extract"| B
-    G -->|"② dbt run + test"| D
+    G["GitHub Actions\n(daily + manual)"] -->|"① TMDB extract"| B
+    G -->|"② Firecrawl extract"| FC
+    G -->|"③ dbt run + test"| D
 ```
 
 **Tools:** Python · Snowflake · dbt · GitHub Actions · Streamlit (Milestone 02)
@@ -148,6 +151,6 @@ streaming-marketing-analytics/
 | Milestone | Due | Status |
 |---|---|---|
 | Proposal | Apr 13, 2026 | Complete |
-| Milestone 01: Extract, Load & Transform | Apr 27, 2026 | In progress |
+| Milestone 01: Extract, Load & Transform | Apr 27, 2026 | Complete |
 | Milestone 02: Present & Polish | May 4, 2026 | Upcoming |
 | Final Submission | May 11, 2026 | Upcoming |
