@@ -1,0 +1,31 @@
+version: 2
+
+models:
+  - name: stg_tmdb_content
+    columns:
+      - name: content_id
+        tests:
+          - not_null
+      - name: content_type
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['movie', 'tv']
+      - name: vote_average
+        tests:
+          - not_null
+      - name: vote_count
+        tests:
+          - not_null
+      - name: release_year
+        tests:
+          - not_null
+
+  - name: stg_tmdb_genres
+    columns:
+      - name: genre_id
+        tests:
+          - not_null
+      - name: genre_name
+        tests:
+          - not_null

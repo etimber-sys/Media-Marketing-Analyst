@@ -1,0 +1,47 @@
+version: 2
+
+models:
+  - name: fct_content_performance
+    columns:
+      - name: content_sk
+        tests:
+          - unique
+          - not_null
+      - name: content_type
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['movie', 'tv']
+      - name: vote_average
+        tests:
+          - not_null
+      - name: vote_count
+        tests:
+          - not_null
+      - name: release_year
+        tests:
+          - not_null
+
+  - name: dim_genre
+    columns:
+      - name: genre_sk
+        tests:
+          - unique
+          - not_null
+      - name: genre_name
+        tests:
+          - not_null
+
+  - name: dim_studio
+    columns:
+      - name: studio_sk
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_date
+    columns:
+      - name: release_year
+        tests:
+          - unique
+          - not_null
