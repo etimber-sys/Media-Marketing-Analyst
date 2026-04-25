@@ -58,19 +58,49 @@ def _get_conn():
         account=os.environ['SNOWFLAKE_ACCOUNT'],
         user=os.environ['SNOWFLAKE_USER'],
         password=os.environ['SNOWFLAKE_PASSWORD'],
-        database=os.environ['SNOWFLAKE_DATABASE'],
         warehouse=os.environ['SNOWFLAKE_WAREHOUSE'],
         role=os.environ['SNOWFLAKE_ROLE'],
-        schema='RAW',
     )
 
 
+def _setup(cursor):
+    db = os.environ['SNOWFLAKE_DATABASE']
+    cursor.execute(f'CREATE DATABASE IF NOT EXISTS {db}')
+    cursor.execute(f'CREATE SCHEMA IF NOT EXISTS {db}.RAW')
+    cursor.execute(f'CREATE SCHEMA IF NOT EXISTS {db}.STAGING')
+    cursor.execute(f'CREATE SCHEMA IF NOT EXISTS {db}.MART')
+    cursor.execute(f'''
+        CREATE TABLE IF NOT EXISTS {db}.RAW.TMDB_CONTENT (
+            content_id        INTEGER,
+            content_type      VARCHAR(10),
+            title             VARCHAR(500),
+            popularity        FLOAT,
+            vote_average      FLOAT,
+            vote_count        INTEGER,
+            release_date      VARCHAR(20),
+            genre_ids         VARCHAR(200),
+            original_language VARCHAR(10),
+            origin_country    VARCHAR(10),
+            extracted_at      TIMESTAMP
+        )
+    ''')
+    cursor.execute(f'''
+        CREATE TABLE IF NOT EXISTS {db}.RAW.TMDB_GENRES (
+            genre_id     INTEGER,
+            genre_name   VARCHAR(100),
+            content_type VARCHAR(10)
+        )
+    ''')
+    print('Snowflake setup complete')
+
+
 def _load(cursor, table: str, rows: list, columns: list):
-    cursor.execute(f'TRUNCATE TABLE RAW.{table}')
+    db = os.environ['SNOWFLAKE_DATABASE']
+    cursor.execute(f'TRUNCATE TABLE {db}.RAW.{table}')
     placeholders = ', '.join(['%s'] * len(columns))
     col_list = ', '.join(columns)
     data = [[row[c] for c in columns] for row in rows]
-    cursor.executemany(f'INSERT INTO RAW.{table} ({col_list}) VALUES ({placeholders})', data)
+    cursor.executemany(f'INSERT INTO {db}.RAW.{table} ({col_list}) VALUES ({placeholders})', data)
     print(f'Loaded {len(rows)} rows into {table}')
 
 
@@ -90,6 +120,7 @@ def main():
     conn = _get_conn()
     try:
         cur = conn.cursor()
+        _setup(cur)
         _load(cur, 'TMDB_GENRES', genres, ['genre_id', 'genre_name', 'content_type'])
         _load(cur, 'TMDB_CONTENT', content, [
             'content_id', 'content_type', 'title', 'popularity',
