@@ -209,3 +209,8 @@ __marimo__/
 # Project requirements
 Project-Requirement-README.md
 proposal-template.md
+
+# dbt
+dbt/target/
+dbt/logs/
+dbt/.user.yml
