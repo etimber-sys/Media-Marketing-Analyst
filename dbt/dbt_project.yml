@@ -1,0 +1,15 @@
+name: streaming_analytics
+version: '1.0.0'
+profile: streaming_analytics
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+
+models:
+  streaming_analytics:
+    staging:
+      +materialized: view
+      +schema: STAGING
+    mart:
+      +materialized: table
+      +schema: MART

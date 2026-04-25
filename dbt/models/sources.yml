@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: raw
+    database: STREAMING_ANALYTICS
+    schema: RAW
+    tables:
+      - name: tmdb_content
+      - name: tmdb_genres

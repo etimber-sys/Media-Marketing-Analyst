@@ -214,3 +214,6 @@ proposal-template.md
 dbt/target/
 dbt/logs/
 dbt/.user.yml
+
+# virtual environment
+.venv/
