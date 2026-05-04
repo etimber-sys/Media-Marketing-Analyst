@@ -24,7 +24,7 @@ An end-to-end analytics engineering portfolio project targeting the **Analyst, M
 | Data Warehouse | Snowflake |
 | Transformation | dbt |
 | Orchestration | GitHub Actions (scheduled) |
-| Dashboard | Streamlit (Streamlit Community Cloud) |
+| Dashboard | [Streamlit Community Cloud](https://media-marketing-analyst-bwkjne739r5wa4bfkbxclr.streamlit.app/) |
 | Knowledge Base | Claude Code |
 | Language | Python |
 | Version Control | Git + GitHub |
