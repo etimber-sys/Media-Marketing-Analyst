@@ -53,11 +53,31 @@ flowchart LR
 
 ## Star Schema
 
-> ERD to be generated from dbt models in Milestone 02.
+```
+fct_content_performance
+├── content_sk (PK)
+├── content_id
+├── content_type          → "movie" | "tv"
+├── title
+├── popularity_score
+├── vote_average
+├── vote_count
+├── release_year          → dim_date.release_year (FK)
+├── primary_genre_id      → dim_genre.genre_id (FK, matched with content_type)
+├── origin_country        → dim_studio.origin_country (FK, matched with original_language)
+└── original_language
 
-**Fact table:** `fct_content_performance` — popularity score, vote average, vote count per title
+dim_genre                     dim_date                  dim_studio
+├── genre_sk (PK)             ├── release_year (PK)     ├── studio_sk (PK)
+├── genre_id                  ├── decade                ├── origin_country
+├── genre_name                └── era                   └── original_language
+└── content_type                   classic / streaming
+                                   era / post-covid
+```
 
-**Dimensions:** `dim_genre`, `dim_studio`, `dim_date`
+**Fact table:** `fct_content_performance` — one row per title, with popularity score, vote average, vote count
+
+**Dimensions:** `dim_genre` (genre × content type), `dim_studio` (origin country × language), `dim_date` (year, decade, era)
 
 ---
 
@@ -111,25 +131,29 @@ streaming-marketing-analytics/
 │   ├── job-posting.pdf
 │   └── proposal.pdf
 ├── extract/
-│   └── tmdb_extract.py
+│   ├── tmdb_extract.py
+│   └── firecrawl_extract.py
 ├── dbt/
 │   ├── dbt_project.yml
 │   ├── profiles.yml.example
 │   └── models/
 │       ├── staging/
-│       │   ├── stg_tmdb_movies.sql
-│       │   └── stg_tmdb_tv_shows.sql
+│       │   ├── stg_tmdb_content.sql
+│       │   └── stg_tmdb_genres.sql
 │       └── mart/
 │           ├── fct_content_performance.sql
 │           ├── dim_genre.sql
 │           ├── dim_studio.sql
 │           └── dim_date.sql
 ├── dashboard/
-│   └── app.py
+│   ├── app.py
+│   └── requirements.txt
 ├── knowledge/
-│   ├── raw/
-│   ├── wiki/
+│   ├── raw/              # 17 scraped sources
+│   ├── wiki/             # synthesized analysis pages
 │   └── index.md
+├── tests/
+│   └── test_snowflake_mart.py
 ├── .github/
 │   └── workflows/
 │       └── tmdb_pipeline.yml
@@ -142,7 +166,13 @@ streaming-marketing-analytics/
 
 ## Key Insights
 
-> To be completed in Milestone 02 after dashboard is built.
+Preliminary findings from the TMDB dataset (full analysis in the dashboard):
+
+- **Action and Drama dominate popularity** across both movies and TV, while genres like Documentary and History lead in vote averages — quality signal vs. reach signal diverge by genre.
+- **TV content has surged post-2015** in both volume and popularity score, reflecting the streaming era's shift from a movie-first to series-first content model.
+- **Post-COVID titles (2020+) outperform catalog** on raw popularity but not vote average — newer content benefits from algorithm exposure, while older catalog earns higher critical scores over time.
+- **English-language content leads on reach; non-English content (ko, ja, es) leads on ratings** — consistent with the global streaming trend where international originals (Squid Game, Parasite) punch above their weight on audience scores.
+- **Vote count and vote average show weak positive correlation** (r ≈ 0.1–0.2), confirming they measure different things: breadth of audience vs. audience satisfaction.
 
 ---
 
@@ -152,5 +182,5 @@ streaming-marketing-analytics/
 |---|---|---|
 | Proposal | Apr 13, 2026 | Complete |
 | Milestone 01: Extract, Load & Transform | Apr 27, 2026 | Complete |
-| Milestone 02: Present & Polish | May 4, 2026 | Upcoming |
+| Milestone 02: Present & Polish | May 4, 2026 | Complete |
 | Final Submission | May 11, 2026 | Upcoming |

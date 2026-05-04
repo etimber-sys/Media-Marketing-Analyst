@@ -215,5 +215,8 @@ dbt/target/
 dbt/logs/
 dbt/.user.yml
 
+# Streamlit secrets (never commit real credentials)
+.streamlit/secrets.toml
+
 # virtual environment
 .venv/
