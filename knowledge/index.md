@@ -8,7 +8,21 @@
 | [key-entities.md](wiki/key-entities.md) | Parent company (Paramount Skydance / formerly ViacomCBS), content franchises (Taylor Sheridan universe — Yellowstone through The Madison; Star Trek; SHOWTIME originals; Nickelodeon IP), key figures (Taylor Sheridan, David Ellison, Tom Ryan), subscriber milestones timeline, and competitor landscape (Netflix, Disney+, Max, Peacock) |
 | [content-strategy-synthesis.md](wiki/content-strategy-synthesis.md) | Cross-source analysis: Taylor Sheridan universe as the top original franchise bet (8M views for The Madison; 12.7M premiere for Yellowstone S4); sports strategy (NFL, UFC, UEFA Champions League); IP-driven approach vs. original IP risk; Pluto TV as free AVOD tier; SHOWTIME integration at the $13.99 tier; and direct connection to the TMDB analysis |
 
-## Raw Sources (17)
+## Raw Sources (26)
+
+### Paramount Global Investor Relations (ir.paramount.com)
+
+| File | Description |
+|---|---|
+| [ir-paramount-news-index.md](raw/ir-paramount-news-index.md) | IR press releases index and quarterly results directory — notes URL restructuring after Skydance merger (PSKY), pending WBD acquisition announced Feb 2026 |
+| [ir-paramount-q4-fy2024.md](raw/ir-paramount-q4-fy2024.md) | Q4 & Full Year 2024 — 77.5M subscribers (+10M FY), Paramount+ #2 domestic SVOD for hours watched, DTC OIBDA improved $1.2B in 2024, Landman/Tulsa King/Lioness as top SVOD originals |
+| [ir-paramount-q3-2024.md](raw/ir-paramount-q3-2024.md) | Q3 2024 — 72M subscribers (+3.5M), DTC first profitable quarter ($49M OIBDA), Paramount+ revenue +25%, Tulsa King S2 biggest global debut in platform history |
+| [ir-paramount-q2-2024.md](raw/ir-paramount-q2-2024.md) | Q2 2024 — 68M subscribers, DTC OIBDA improved $450M to $26M (first profitable quarter), Paramount+ revenue +46%, Skydance merger agreement announced July 7 2024 |
+| [ir-paramount-q1-2024.md](raw/ir-paramount-q1-2024.md) | Q1 2024 — 71M+ subscribers, Paramount+ revenue +51%, content rationalization strategy (removing international content), Mean Girls and Bob Marley films #1 at box office |
+| [ir-paramount-q4-fy2023.md](raw/ir-paramount-q4-fy2023.md) | Q4 & Full Year 2023 — 67.5M subscribers, Paramount+ revenue +69% in Q4, NFL on CBS most-watched regular season since 1998, target domestic profitability in 2025 |
+| [ir-paramount-q3-2023.md](raw/ir-paramount-q3-2023.md) | Q3 2023 — 63M+ subscribers, Paramount+ revenue +61%, DTC OIBDA improved 31%, DTC losses forecast to have peaked in 2022 |
+| [ir-paramount-q2-2023.md](raw/ir-paramount-q2-2023.md) | Q2 2023 — 61M subscribers, Paramount+ revenue +47%, Paramount+ With Showtime launched June 27 2023 (major integration milestone) |
+| [ir-paramount-q1-2023.md](raw/ir-paramount-q1-2023.md) | Q1 2023 — 60M subscribers, Paramount+ revenue +65%, key drivers: 1923/Tulsa King/Mayor of Kingstown (Sheridan universe), Star Trek: Picard, Top Gun: Maverick |
 
 ### Paramount Press Express (paramountpressexpress.com)
 
