@@ -33,6 +33,19 @@ Subscriber milestones (source: Wikipedia Paramount+ article):
 
 The rebranding from CBS All Access to Paramount+ in March 2021 was the single largest growth catalyst, adding approximately 25 million subscribers in the first year. A Wall Street Journal report noted Paramount was planning price increases for US subscribers in early 2026.
 
+## Revenue and Financial Context
+
+Direct financial data from Paramount+'s IR earnings transcripts is unavailable: the ir.paramount.com investor relations portal returned 404 errors following the Skydance-Paramount merger in August 2025, and no earnings transcripts were successfully scraped.
+
+Financial context available from other sources:
+
+- **Skydance-Paramount merger:** The Skydance deal was valued at approximately $8 billion, with the merger effective August 7, 2025.
+- **South Park deal:** $1.5 billion deal signed July 2025 to bring South Park exclusively to Paramount+ over multiple years.
+- **UFC deal:** $7.7 billion over 7 years (2026–2033), representing one of the largest sports rights deals in the platform's history.
+- **Warner Bros. Discovery acquisition:** Approved by shareholders April 23, 2026, with a goal of combining Paramount+ and HBO Max into a 200M+ subscriber platform.
+
+For any available financial details, see `knowledge/raw/wikipedia-paramount-plus.md`.
+
 ## Pricing and Tiers
 
 As of May 2026 (source: paramountplus-home.md):
