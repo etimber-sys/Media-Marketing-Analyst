@@ -33,21 +33,33 @@ An end-to-end analytics engineering portfolio project targeting the **Analyst, M
 
 ## Pipeline Architecture
 
+### Structured Data Path
+
 ```mermaid
 flowchart LR
     A[TMDB API] -->|REST| B["extract/tmdb_extract.py"]
-    W["Paramount IR\n& Press Sites"] -->|Firecrawl| FC["extract/firecrawl_extract.py"]
     B -->|load| C[("Snowflake\nRAW")]
-    FC -->|load| C
     C -->|dbt staging| D[("Snowflake\nSTAGING")]
     D -->|dbt mart| E[("Snowflake\nMART")]
-    E -.->|Milestone 02| F["Streamlit\nDashboard"]
-    G["GitHub Actions\n(daily + manual)"] -->|"① TMDB extract"| B
-    G -->|"② Firecrawl extract"| FC
-    G -->|"③ dbt run + test"| D
+    E -->|query| F["Streamlit\nDashboard"]
+    G["GitHub Actions\n(daily)"] -->|"① extract"| B
+    G -->|"② dbt run + test"| D
 ```
 
-**Tools:** Python · Snowflake · dbt · GitHub Actions · Streamlit (Milestone 02)
+**Tools:** Python · Snowflake · dbt · GitHub Actions · Streamlit
+
+### Knowledge Base Path
+
+```mermaid
+flowchart LR
+    W["Paramount IR\n& Press Sites"] -->|Firecrawl| FC["extract/firecrawl_extract.py"]
+    FC -->|load| C[("Snowflake\nRAW")]
+    C -->|stored in| KB["knowledge/raw/"]
+    KB -->|synthesized into| WK["knowledge/wiki/"]
+    H["GitHub Actions\n(weekly)"] -->|scrape| FC
+```
+
+**Tools:** Firecrawl · Snowflake · GitHub Actions · Claude Code (wiki synthesis)
 
 ---
 
@@ -156,7 +168,8 @@ streaming-marketing-analytics/
 │   └── test_snowflake_mart.py
 ├── .github/
 │   └── workflows/
-│       └── tmdb_pipeline.yml
+│       ├── tmdb-pipeline.yml
+│       └── knowledge-pipeline.yml
 ├── CLAUDE.md
 ├── README.md
 └── .gitignore
