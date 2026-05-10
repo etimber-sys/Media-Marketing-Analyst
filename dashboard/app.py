@@ -120,6 +120,26 @@ ORDER BY avg_popularity DESC
 TYPE_COLORS = {"movie": "#0066CC", "tv": "#FF6B35"}
 ERA_ORDER   = ["classic", "streaming era", "post-covid"]
 
+# ── Language code → full name ─────────────────────────────────────────────────
+LANG_NAMES = {
+    "en": "English", "fr": "French", "ja": "Japanese", "ko": "Korean",
+    "es": "Spanish", "de": "German", "it": "Italian", "pt": "Portuguese",
+    "zh": "Chinese", "hi": "Hindi", "ru": "Russian", "ar": "Arabic",
+    "tr": "Turkish", "pl": "Polish", "sv": "Swedish", "nl": "Dutch",
+    "da": "Danish", "fi": "Finnish", "no": "Norwegian", "th": "Thai",
+    "id": "Indonesian", "cs": "Czech", "hu": "Hungarian", "ro": "Romanian",
+    "he": "Hebrew", "uk": "Ukrainian", "bn": "Bengali", "fa": "Persian",
+    "vi": "Vietnamese", "ta": "Tamil", "te": "Telugu", "ml": "Malayalam",
+    "ms": "Malay", "tl": "Filipino", "el": "Greek", "sk": "Slovak",
+    "hr": "Croatian", "bg": "Bulgarian", "sr": "Serbian", "ca": "Catalan",
+    "lv": "Latvian", "lt": "Lithuanian", "sl": "Slovenian", "et": "Estonian",
+    "is": "Icelandic", "mk": "Macedonian", "sq": "Albanian", "bs": "Bosnian",
+    "af": "Afrikaans", "sw": "Swahili", "zu": "Zulu", "cy": "Welsh",
+    "ga": "Irish", "eu": "Basque", "gl": "Galician", "lb": "Luxembourgish",
+    "mt": "Maltese", "hy": "Armenian", "ka": "Georgian", "az": "Azerbaijani",
+    "kk": "Kazakh", "uz": "Uzbek", "mn": "Mongolian", "cn": "Cantonese",
+}
+
 # ── Header ────────────────────────────────────────────────────────────────────
 st.title("Streaming Marketing Analytics")
 st.caption(
@@ -330,6 +350,9 @@ with tab3:
 # ─────────────────────────────────────────────────────────────────────────────
 with tab4:
     df_lang = _apply_filter(_query(_LANG_SQL))
+    df_lang["original_language"] = (
+        df_lang["original_language"].map(LANG_NAMES).fillna(df_lang["original_language"])
+    )
 
     st.subheader("Average Popularity by Original Language")
     st.caption("Languages with fewer than 5 titles excluded.")
@@ -343,7 +366,7 @@ with tab4:
     fig = px.bar(
         top_pop_lang, x="original_language", y="avg_popularity",
         color="avg_popularity", color_continuous_scale="Purples",
-        labels={"avg_popularity": "Avg Popularity", "original_language": "Language Code"},
+        labels={"avg_popularity": "Avg Popularity", "original_language": "Language"},
     )
     fig.update_layout(coloraxis_showscale=False)
     st.plotly_chart(fig, use_container_width=True)
