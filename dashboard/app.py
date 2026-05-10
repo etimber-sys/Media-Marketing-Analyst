@@ -37,7 +37,9 @@ def _creds() -> dict:
 def _query(sql: str) -> pd.DataFrame:
     conn = snowflake.connector.connect(**_creds())
     try:
-        return pd.read_sql(sql, conn)
+        df = pd.read_sql(sql, conn)
+        df.columns = df.columns.str.lower()
+        return df
     finally:
         conn.close()
 
