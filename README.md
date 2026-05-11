@@ -197,4 +197,4 @@ Preliminary findings from the TMDB dataset (full analysis in the dashboard):
 | Proposal | Apr 13, 2026 | Complete |
 | Milestone 01: Extract, Load & Transform | Apr 27, 2026 | Complete |
 | Milestone 02: Present & Polish | May 4, 2026 | Complete |
-| Final Submission | May 11, 2026 | Upcoming |
+| Final Submission | May 11, 2026 | Complete |
