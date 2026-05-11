@@ -38,12 +38,12 @@ An end-to-end analytics engineering portfolio project targeting the **Analyst, M
 ```mermaid
 flowchart LR
     A[TMDB API] -->|REST| B["extract/tmdb_extract.py"]
-    B -->|load| C[("Snowflake\nRAW")]
-    C -->|dbt staging| D[("Snowflake\nSTAGING")]
-    D -->|dbt mart| E[("Snowflake\nMART")]
+    subgraph GHA["GitHub Actions (daily)"]
+        B -->|load| C[("Snowflake\nRAW")]
+        C -->|dbt staging| D[("Snowflake\nSTAGING")]
+        D -->|dbt mart| E[("Snowflake\nMART")]
+    end
     E -->|query| F["Streamlit\nDashboard"]
-    G["GitHub Actions\n(daily)"] -->|"① extract"| B
-    G -->|"② dbt run + test"| D
 ```
 
 **Tools:** Python · Snowflake · dbt · GitHub Actions · Streamlit
@@ -53,10 +53,11 @@ flowchart LR
 ```mermaid
 flowchart LR
     W["Paramount IR\n& Press Sites"] -->|Firecrawl| FC["extract/firecrawl_extract.py"]
-    FC -->|load| C[("Snowflake\nRAW")]
-    C -->|stored in| KB["knowledge/raw/"]
-    KB -->|synthesized into| WK["knowledge/wiki/"]
-    H["GitHub Actions\n(weekly)"] -->|scrape| FC
+    subgraph GHA["GitHub Actions (weekly)"]
+        FC -->|load| C[("Snowflake\nRAW")]
+        C -->|stored in| KB["knowledge/raw/"]
+        KB -->|synthesized into| WK["knowledge/wiki/"]
+    end
 ```
 
 **Tools:** Firecrawl · Snowflake · GitHub Actions · Claude Code (wiki synthesis)
